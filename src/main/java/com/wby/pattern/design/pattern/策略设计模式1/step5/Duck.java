@@ -1,10 +1,16 @@
-package com.wby.pattern.design.pattern.策略设计模式.step6;
+package com.wby.pattern.design.pattern.策略设计模式1.step5;
 
 /**
  * @Auther: LangWeiXian
  * @Date: 2021/7/31 11:36
- * @Description: 动态设定行为
- *  我们想在鸭子子类通过set()方法设定鸭子的行为,而不是在鸭子的构造器内实例化
+ * @Description: 关键在于，鸭子现在将飞行和呱呱叫的动作“委托”给别人处理，而不是使用定义在自己类(或子类)内的方法。
+ *
+ * 实现方法如下：
+ *      1.鸭子中加入两个实例变量，分别是FlyBehavior 和Quackbehavior，声明为接口类型(不是具体类实现类型)，每个变量会利用多态的方法在运行时引用正确的类型
+ *          将Duck类与其他所有子类的fly和quack方法移除。
+ *          用performFly和performQuack取代Duck类中的fly和quack
+ *      2.在Duck类中实现performQuack和performFly
+ *      3.设定FlyBehavior 和Quackbehavior的实例变量。参考MallardDuck类
 */
 public abstract class Duck {
     FlyBehavior flyBehavior;
@@ -28,15 +34,7 @@ public abstract class Duck {
         System.out.println("all duck float,even decoys");
     }
 
-    public void setFlyBehavior(FlyBehavior flyBehavior) {
-        this.flyBehavior = flyBehavior;
-    }
-
-    public void setQuackbehavior(Quackbehavior quackbehavior) {
-        this.quackbehavior = quackbehavior;
-    }
 }
-
 interface FlyBehavior{
     public void fly();
 }
@@ -56,14 +54,6 @@ class FlyNoWay implements FlyBehavior{
     public void fly() {
         //什么都不做，不会飞。实现所有不会飞的鸭子的动作。
         System.out.println("I can`t fly");
-    }
-}
-
-class FlyRocket implements FlyBehavior{
-
-    @Override
-    public void fly() {
-        System.out.println("I`m flying with rocket");
     }
 }
 
@@ -97,7 +87,6 @@ class MuteQuack implements Quackbehavior {
         System.out.println("MuteQuack");
     }
 }
-
 /**
 *  MallardDuck继承自Duck，具有flyBehavior和quackbehavior实例变量
  *  野鸭：能呱呱叫，并且有翅膀能飞。
@@ -115,19 +104,6 @@ class MallardDuck extends Duck{
     }
 }
 
-class MOdelDuck extends Duck{
-    public MOdelDuck() {
-        //一开始并不会飞,后面给他安装上火箭动力的飞行行为
-        flyBehavior=new FlyNoWay();
-        quackbehavior=new Quack();
-    }
-
-    @Override
-    public void display() {
-        //模型鸭子:不会飞
-    }
-}
-
 /**
 * 虽然把行为设定成具体的类：通过实例化类似Quack或FlyWithWings，并指定到行为引用变量中，但是还是可以在运行时改变该行为
  * 所以目前该做法很有弹性。
@@ -141,19 +117,6 @@ class MiniDuckSimulator{
         //调用继承来的方法，进而委托给该对象的Quackbehavior来处理(即调用quackbehavior的quack()方法)
         mallardDuck.perforQuack();
         mallardDuck.performFly();
-
-        /**
-         * 结果:
-         *      I can`t fly
-         *      I`m flying with rocket
-         * 说明模型鸭子动态的改变了行为.如果吧行为的实现绑死在鸭子类中,就无法做到这样.
-         * 第一次调用performFly()会被委托给flyBehavior对象(也就是FlyNoWay对象.该对象是模型鸭子构造器设置的)
-         * 然后调用set方法,把火箭动力飞行的行为设定到模型鸭子中
-         */
-        Duck mOdelDuck = new MOdelDuck();
-        mOdelDuck.performFly();
-        mOdelDuck.setFlyBehavior(new FlyRocket());
-        mOdelDuck.performFly();
     }
 }
 /**

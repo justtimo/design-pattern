@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.策略设计模式.step1;
+package com.wby.pattern.design.pattern.策略设计模式1.step1;
 
 /**
  * @Auther: LangWeiXian

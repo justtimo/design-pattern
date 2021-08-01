@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.策略设计模式.step7;
+package com.wby.pattern.design.pattern.策略设计模式1.step7;
 
 /**
  * 来看看整体布局
