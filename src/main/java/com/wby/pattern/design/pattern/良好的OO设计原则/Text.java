@@ -8,6 +8,7 @@ package com.wby.pattern.design.pattern.良好的OO设计原则;
  *      把会变化的部分取出并封装起来，好让其他部分不会受到影响
  *  2.针对接口编程，而不是针对实现编程
  *  3.多用组合,少用继承
+ *  4.为了交互对象之间的松耦合而努力
  *
  */
 public class Text {
