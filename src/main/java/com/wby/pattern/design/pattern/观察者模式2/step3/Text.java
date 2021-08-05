@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.ObserverPattern2.step3;
+package com.wby.pattern.design.pattern.观察者模式2.step3;
 
 /**
  *

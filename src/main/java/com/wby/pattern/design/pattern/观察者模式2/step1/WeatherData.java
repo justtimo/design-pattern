@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.ObserverPattern2.step1;
+package com.wby.pattern.design.pattern.观察者模式2.step1;
 
 public class WeatherData {
     public void getTemperature() {

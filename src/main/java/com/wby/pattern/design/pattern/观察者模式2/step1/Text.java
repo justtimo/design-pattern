@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.ObserverPattern2.step1;
+package com.wby.pattern.design.pattern.观察者模式2.step1;
 
 /**
  * 观察者模式可以帮你的对象获悉现况,不会错过该对象感兴趣的事情.

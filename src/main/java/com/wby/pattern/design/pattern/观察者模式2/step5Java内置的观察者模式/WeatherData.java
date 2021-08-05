@@ -1,5 +1,6 @@
-package com.wby.pattern.design.pattern.ObserverPattern2.step5Java内置的观察者模式;
+package com.wby.pattern.design.pattern.观察者模式2.step5Java内置的观察者模式;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,14 +34,22 @@ class Observable{
     }
 }
 public class WeatherData extends Observable{
-    void getTem(){
-
+    public WeatherData() {
+        observers=new ArrayList<>();
     }
-    void getHum(){
 
+    float getTem(){
+return 2.0f;
+    }
+    float getHum(){
+        return 1.0f;
     }
     void getPress(){
 
+    }
+    void dataChanged(){
+        setChange();
+        notifyObserver();
     }
 }
 interface Observer {
@@ -60,6 +69,12 @@ class CurrentDisplay implements Observer,Display {
 
     @Override
     public void update(Observable o,Object args) {
+        System.out.println("CurrentDisplay update: Observable:" + o + "   args:"+args);
+    }
+    public void update(Observable o,Object... args) {
+        for (Object arg : args) {
+            System.out.println("CurrentDisplay update: Observable:" + o + "   args:"+arg);
+        }
 
     }
     @Override
@@ -81,7 +96,7 @@ class ForseDisplay implements Observer,Display {
     }
     @Override
     public void update(Observable o,Object args) {
-
+        System.out.println("ForseDisplay update");
     }
     @Override
     public void update() {
@@ -102,7 +117,7 @@ class StatisticDisplay implements Observer,Display {
     }
     @Override
     public void update(Observable o,Object args) {
-
+        System.out.println("StatisticDisplay update");
     }
     @Override
     public void update() {
@@ -117,5 +132,10 @@ class StatisticDisplay implements Observer,Display {
 class Test{
     public static void main(String[] args) {
         WeatherData weatherData = new WeatherData();
+        CurrentDisplay currentDisplay = new CurrentDisplay(weatherData);
+        ForseDisplay forseDisplay = new ForseDisplay(weatherData);
+        StatisticDisplay statisticDisplay = new StatisticDisplay(weatherData);
+        weatherData.dataChanged();
+        currentDisplay.update(weatherData,weatherData.getHum(),weatherData.getTem());
     }
 }
