@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.装饰者模式.step1;
+package com.wby.pattern.design.pattern.装饰者模式3.step1;
 
 /**
  * 本章可以称为:给爱用继承的人一个全新的设计眼界.

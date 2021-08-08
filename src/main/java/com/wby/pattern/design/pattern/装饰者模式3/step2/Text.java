@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.装饰者模式.step2;
+package com.wby.pattern.design.pattern.装饰者模式3.step2;
 
 /**
  * 利用实例变量和继承,来追踪这些调料

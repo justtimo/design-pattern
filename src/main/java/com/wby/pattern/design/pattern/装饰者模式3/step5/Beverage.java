@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.装饰者模式.step5;
+package com.wby.pattern.design.pattern.装饰者模式3.step5;
 
 
 /**

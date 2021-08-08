@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.装饰者模式.step3;
+package com.wby.pattern.design.pattern.装饰者模式3.step3;
 
 /**
  * 这就是设计原则5:
