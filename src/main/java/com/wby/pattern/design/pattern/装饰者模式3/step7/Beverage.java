@@ -1,14 +1,23 @@
-package com.wby.pattern.design.pattern.装饰者模式3.step5;
+package com.wby.pattern.design.pattern.装饰者模式3.step7;
 
 
 /**
- * 饮料抽象类:装饰者模式中的 顶级超类
- *
- * @author LangWeiXian
- * @date 2021/08/05
+ * 现在在星巴克咖啡加上容量大小,顾客可以选择小贝,中北,大杯.这是任何咖啡都具备的行为,所以在Beverage类上添加getSize,setSize方法.
+ * 并且咖啡根据容量收费
  */
 public abstract class Beverage {
     String description="UnKnown Beverage";
+    public enum Size { TALL, GRANDE, VENTI };
+
+    Size size = Size.TALL;
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public Size getSize() {
+        return this.size;
+    }
 
     public String getDescription() {
         return description;
@@ -16,12 +25,6 @@ public abstract class Beverage {
     public abstract double cost();
 }
 
-/**
- * 浓缩咖啡
- *
- * @author LangWeiXian
- * @date 2021/08/05
- */
 class Espresso extends Beverage {
     public Espresso() {
         //为了设置描述,我们写了一个构造器,description来自父类
@@ -34,6 +37,7 @@ class Espresso extends Beverage {
         return 1.99;
     }
 }
+
 class HouseBlend extends Beverage {
     public HouseBlend() {
         description = "HouseBlend";
@@ -43,6 +47,7 @@ class HouseBlend extends Beverage {
         return 0.89;
     }
 }
+
 class DarkRoast extends Beverage {
     public DarkRoast() {
         description = "DarkRoast";
@@ -52,6 +57,7 @@ class DarkRoast extends Beverage {
         return 0.89;
     }
 }
+
 class Decaf extends Beverage {
     public Decaf() {
         description = "Decaf";
@@ -62,25 +68,10 @@ class Decaf extends Beverage {
     }
 }
 
-/**
- * 调味品装饰: 调料抽象类,也就是装饰者类,所有调料的父类
- *
- * @author LangWeiXian
- * @date 2021/08/05
- */
 abstract class CondimentDecorator extends Beverage{
     public abstract String getDescription();
 }
 
-/**
- * 摩卡:是一个装饰者,所以继承自CondimentDecorator
- * 要让Mocha能够引用一个Beverage,实现方式如下:
- *      1.用一个实例变量记录饮料,也就是被装饰者
- *      2.想办法让被装饰者(饮料)被记录到实例变量中:这里的做法是,把饮料当做构造器参数,再由构造器将饮料记录在实例变量中
- *
- * @author LangWeiXian
- * @date 2021/08/05
- */
 class Mocha extends CondimentDecorator{
     Beverage beverage;//darkRoast
 
@@ -88,11 +79,6 @@ class Mocha extends CondimentDecorator{
         this.beverage = beverage;
     }
 
-    /**
-     * 成本:计算带Mocha饮料的价格.
-     * 首先将调用委托给被装饰对象,以计算价钱,然后再加上Mocha的价钱,得到最后结果
-     * @return double
-     */
     @Override
     public double cost() {
         double cost=0.20+ beverage.cost();
@@ -100,16 +86,12 @@ class Mocha extends CondimentDecorator{
         return cost;
     }
 
-    /**
-     * 得到描述:我们希望不只是描述饮料,而是完整的连同调料也描述出来.
-     * 所以首先利用委托的做法,得到一个叙述,然后再加上附加的叙述(Mocha)
-     * @return {@link String}
-     */
     @Override
     public String getDescription() {
         return beverage.getDescription()+",Mocha";
     }
 }
+
 class Soy extends CondimentDecorator{
     Beverage beverage;
 
@@ -120,6 +102,14 @@ class Soy extends CondimentDecorator{
     @Override
     public double cost() {
         double cost=0.11+ beverage.cost();
+        if (beverage.getSize()==Size.TALL){
+            cost+=0.10;
+        }else if (beverage.getSize() == Size.GRANDE) {
+            cost += .15;
+        } else if (beverage.getSize() == Size.VENTI) {
+            cost += .20;
+        }
+
         System.out.println(beverage.toString());
         return cost;
     }
@@ -128,6 +118,7 @@ class Soy extends CondimentDecorator{
         return beverage.getDescription()+",Soy";
     }
 }
+
 class Whipe extends CondimentDecorator{
     Beverage beverage;
 
@@ -169,16 +160,4 @@ class Test{
         System.out.println(houseBlend.getDescription() + "$ "+houseBlend.cost());*/
     }
 }
-/**
-* Q:如果针对特定种类的具体组件(例如HouseBlend),做一些特殊的事情(例如:打折),我担心这样的设计是否恰当.因为一旦用装饰者包装HouseBlend,就会造成类型改变.
- * A:如果你把代码写成依赖于具体的组件类型,那么装饰者就会导致程序出问题.只有针对抽象组件类型编程时,才不会因为装饰者而受到影响.但是,如果的确针对特定的具体组件编程,就应该
- *      重新思考你的应用架构,以及装饰者是否合适.
- * Q:对于使用饮料的某些客户来说,会不会容易不使用最外圈的装饰者?比如,有深谙咖啡,以摩卡,豆浆,奶泡来装饰,引用到豆浆而不是奶泡.,代码会好些一些,意味着订单里没有奶泡了.
- * A:你可以狡辩说:装饰者模式必须管理更多的对象,所以犯下错误的机会增多.但是,装饰者通常是用其他类似于工厂或者生成器这样的模式创建的.一旦我们讲到这个模式,你就会
- *      明白具体的组件以及装饰者的创建过程,他们会"封装的很好",所以不会有这样的问题.
- * Q:装饰者知道一连串装饰链中其他装饰者的存在吗?比如,想要让getDescription()列出"Whip,Doouble,Mocha"而不是Mocha,Whip,Mocha,这些需要最外圈的装饰者
- *      知道有哪些装饰者牵涉其中.
- * A:装饰者该做的事,就是增加行为到被包装对象上.当需要窥视装饰者链中的每一个装饰者时,这就超出他们的天赋了.但是,并不是做不到,可以写一个CondimentPrettyprint
- *      装饰者,解析出最后描述的字符串,然后把"Mocha,Whip,Mocha"变成"Whip,Doouble,Mocha".如果能把getDescription()的返回值变成ArrayList类型,
- *      让每个名称独立开来,那么CondimentPrettyprint更容易编写
-*/
+
