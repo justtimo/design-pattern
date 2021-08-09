@@ -45,7 +45,7 @@ class HouseBlend extends Beverage {
 }
 class DarkRoast extends Beverage {
     public DarkRoast() {
-        description = "HouseBlend";
+        description = "DarkRoast";
     }
     @Override
     public double cost() {
@@ -54,7 +54,7 @@ class DarkRoast extends Beverage {
 }
 class Decaf extends Beverage {
     public Decaf() {
-        description = "HouseBlend";
+        description = "Decaf";
     }
     @Override
     public double cost() {
@@ -82,7 +82,7 @@ abstract class CondimentDecorator extends Beverage{
  * @date 2021/08/05
  */
 class Mocha extends CondimentDecorator{
-    Beverage beverage;
+    Beverage beverage;//darkRoast
 
     public Mocha(Beverage beverage) {
         this.beverage = beverage;
@@ -95,7 +95,9 @@ class Mocha extends CondimentDecorator{
      */
     @Override
     public double cost() {
-        return 0.20+ beverage.cost();
+        double cost=0.20+ beverage.cost();
+        System.out.println(beverage.toString());
+        return cost;
     }
 
     /**
@@ -117,7 +119,9 @@ class Soy extends CondimentDecorator{
 
     @Override
     public double cost() {
-        return 0.11+ beverage.cost();
+        double cost=0.11+ beverage.cost();
+        System.out.println(beverage.toString());
+        return cost;
     }
     @Override
     public String getDescription() {
@@ -133,7 +137,9 @@ class Whipe extends CondimentDecorator{
 
     @Override
     public double cost() {
-        return 0.20+ beverage.cost();
+        double cost=0.20+ beverage.cost();
+        System.out.println(beverage.toString());
+        return cost;
     }
 
     @Override
@@ -142,3 +148,32 @@ class Whipe extends CondimentDecorator{
     }
 }
 
+class Test{
+    public static void main(String[] args) {
+        //一杯Espresso,不需要任何调料,打印他的价格
+        /*Espresso espresso = new Espresso();
+        System.out.println(espresso.getDescription()+"$ "+espresso.cost());*/
+
+        //一杯DarkRoast,两份Mocha,一份Whip
+        Beverage darkRoast = new DarkRoast();
+        darkRoast=new Mocha(darkRoast);
+        darkRoast=new Soy(darkRoast);
+        darkRoast=new Whipe(darkRoast);
+        System.out.println(darkRoast.getDescription() + "$ "+darkRoast.cost());
+
+        //
+        /*Beverage houseBlend = new HouseBlend();
+        houseBlend=new Soy(houseBlend);
+        houseBlend=new Mocha(houseBlend);
+        houseBlend = new Whipe(houseBlend);
+        System.out.println(houseBlend.getDescription() + "$ "+houseBlend.cost());*/
+    }
+}
+/**
+* Q:如果针对特定种类的具体组件(例如HouseBlend),做一些特殊的事情(例如:打折),我担心这样的设计是否恰当.因为一旦用装饰者包装HouseBlend,就会造成类型改变.
+ * A:如果你把代码写成依赖于具体的组件类型,那么装饰者就会导致程序出问题.只有针对抽象组件类型编程时,才不会因为装饰者而受到影响.但是,如果的确针对特定的具体组件编程,就应该
+ *      重新思考你的应用架构,以及装饰者是否合适.
+ * Q:对于使用饮料的某些客户来说,会不会容易不使用最外圈的装饰者?比如,有深谙咖啡,以摩卡,豆浆,奶泡来装饰,引用到豆浆而不是奶泡.,代码会好些一些,意味着订单里没有奶泡了.
+ * A:你可以狡辩说:装饰者模式必须管理更多的对象,所以犯下错误的机会增多.但是,装饰者通常是用其他类似于工厂或者生成器这样的模式创建的.一旦我们讲到这个模式,你就会
+ *      明白具体的组件以及装饰者的创建过程,他们会"封装的很好",所以不会有这样的问题.
+*/
