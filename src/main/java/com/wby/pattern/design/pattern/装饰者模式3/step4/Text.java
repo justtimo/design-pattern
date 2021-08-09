@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.装饰者模式.step4;
+package com.wby.pattern.design.pattern.装饰者模式3.step4;
 
 /**
  * 用装饰者构造饮料订单:
