@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.Text</OriginalElement>
+  <nodes>
+    <node x="460.45000000000005" y="0.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractFactory</node>
+    <node x="692.5" y="150.5">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractProductA</node>
+    <node x="0.0" y="150.5">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractProductB</node>
+    <node x="305.45000000000005" y="264.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductB1</node>
+    <node x="908.5" y="150.5">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.Client</node>
+    <node x="458.45000000000005" y="264.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductA2</node>
+    <node x="685.1166666666667" y="264.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductA1</node>
+    <node x="70.38333333333333" y="264.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductB2</node>
+    <node x="450.05" y="127.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ConcreteFactory1</node>
+    <node x="234.05" y="127.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ConcreteFactory2</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductA2" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ConcreteFactory2" relationship="GENERALIZATION">
+      <point x="-33.25" y="-15.0" />
+      <point x="491.70000000000005" y="244.0" />
+      <point x="332.05" y="244.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductA1" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractProductA" relationship="REALIZATION">
+      <point x="33.25" y="-15.0" />
+      <point x="784.8666666666667" y="224.0" />
+      <point x="790.5" y="224.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductB1" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractProductB" relationship="REALIZATION">
+      <point x="-33.25" y="-15.0" />
+      <point x="338.70000000000005" y="234.0" />
+      <point x="98.0" y="234.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductB2" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ConcreteFactory2" relationship="GENERALIZATION">
+      <point x="33.25" y="-15.0" />
+      <point x="170.13333333333333" y="244.0" />
+      <point x="332.05" y="244.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductA2" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractProductA" relationship="REALIZATION">
+      <point x="33.25" y="-15.0" />
+      <point x="558.2" y="224.0" />
+      <point x="790.5" y="224.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductB2" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractProductB" relationship="REALIZATION">
+      <point x="-33.25" y="-15.0" />
+      <point x="103.63333333333333" y="234.0" />
+      <point x="98.0" y="234.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ConcreteFactory1" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractFactory" relationship="REALIZATION">
+      <point x="0.0" y="-38.5" />
+      <point x="548.05" y="102.0" />
+      <point x="556.45" y="102.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductA1" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ConcreteFactory1" relationship="GENERALIZATION">
+      <point x="-33.25" y="-15.0" />
+      <point x="718.3666666666667" y="234.0" />
+      <point x="548.05" y="234.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ConcreteFactory2" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractFactory" relationship="REALIZATION">
+      <point x="0.0" y="-38.5" />
+      <point x="332.05" y="102.0" />
+      <point x="556.45" y="102.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.Client" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.AbstractFactory" relationship="REALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="961.5" y="102.0" />
+      <point x="556.45" y="102.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ProductB1" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ConcreteFactory1" relationship="GENERALIZATION">
+      <point x="33.25" y="-15.0" />
+      <point x="405.20000000000005" y="234.0" />
+      <point x="548.05" y="234.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.8917874396135266" showDependencies="true" x="507.5" y="147.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

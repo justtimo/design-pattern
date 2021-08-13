@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.PizzaIngredientFactory</OriginalElement>
+  <nodes>
+    <node x="186.75" y="0.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.PizzaIngredientFactory</node>
+    <node x="0.0" y="215.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ChicagoPizzaIngredientFactory</node>
+    <node x="333.0" y="215.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.NYPizzaIngredientFactory</node>
+    <node x="0.0" y="425.0">com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.PizzaStore</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ChicagoPizzaIngredientFactory" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.PizzaIngredientFactory" relationship="REALIZATION">
+      <point x="0.0" y="-82.5" />
+      <point x="156.5" y="190.0" />
+      <point x="311.75" y="190.0" />
+      <point x="0.0" y="82.5" />
+    </edge>
+    <edge source="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.NYPizzaIngredientFactory" target="com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.PizzaIngredientFactory" relationship="REALIZATION">
+      <point x="0.0" y="-82.5" />
+      <point x="467.0" y="190.0" />
+      <point x="311.75" y="190.0" />
+      <point x="0.0" y="82.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="156.5" y="187.5" />
+  <SelectedNodes>
+    <node>com.wby.pattern.design.pattern.工厂方法模式和抽象工厂模式.nextStep3.ChicagoPizzaIngredientFactory</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
