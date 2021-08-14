@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.工厂模式;
+package com.wby.pattern.design.pattern.工厂模式.step1;
 
 import java.util.ArrayList;
 import java.util.List;
