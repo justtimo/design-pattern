@@ -11,6 +11,7 @@ package com.wby.pattern.design.pattern.良好的OO设计原则;
  *  4.为了交互对象之间的松耦合而努力
  *  5.类应该对扩展开放,对修改关闭
  *  6.依赖抽象,不要依赖具体类
+ *  7. 只和朋友交谈:最少知识原则
  *
  */
 public class Text {

@@ -1,4 +1,4 @@
-package com.wby.pattern.design.pattern.适配器模式7.step2;
+package com.wby.pattern.design.pattern.适配器模式与外观模式7.step2;
 
 /**
  * 如果走路像鸭子,叫声像鸭子,那么他可能是一只包装了鸭子适配器的火鸡
