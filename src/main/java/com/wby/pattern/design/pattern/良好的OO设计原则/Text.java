@@ -12,6 +12,7 @@ package com.wby.pattern.design.pattern.良好的OO设计原则;
  *  5.类应该对扩展开放,对修改关闭
  *  6.依赖抽象,不要依赖具体类
  *  7. 只和朋友交谈:最少知识原则
+ *  8. 好莱坞原则:别调用(打电话)我们,我们会调用(打电话给)你
  *
  */
 public class Text {
