@@ -1,6 +1,12 @@
-package com.wby.pattern.design.pattern.jdk8Time;
+package com.wby.pattern.design.pattern.jdk8.Time;
 
+import lombok.SneakyThrows;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.Format;
+import java.text.NumberFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -8,6 +14,7 @@ import java.time.format.TextStyle;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
@@ -210,32 +217,168 @@ public class TimeTest {
     }
 }
 class Testttt{
-    public static void main(String[] args) {
-        LocalDate date = LocalDate.now();
-        int today = date.getDayOfMonth();
-        int month = date.getMonthValue();
-        date = date.minusDays(today - 1);
-        DayOfWeek weekDay = date.getDayOfWeek();
-        int value = weekDay.getValue();
+    private Date birthday;
 
-        System.out.println("Mon Tue Wed Thu Fri Sat Sun");
-        for (int i = 0; i < value; i++) {
-            System.out.print("  ");
+    private final StringBuilder evalutions;
+    /**
+     * 静态域: 每个类只有一个这样的域.
+     * 每个Testtt对象都有一个自己的id域,但这个类将共享一个nextId. 即: 1000个Testttt对象,则有1000个实例域id,但是只有一个静态域nextId.即使没有一个Testtt对象,静态域nextId也存在
+     * 静态域属于类,不属于任何独立的对象
+     */
+    private static int nextId;
+    /**
+     * 实例域: 每个对象对于所有的实例域都有一份自己的拷贝
+     */
+    private int id;
+
+    public Date getBirthday() {
+        //return birthday;  error example
+        return (Date)birthday.clone();
+    }
+
+    public Testttt(Date birthday) {
+        this.birthday = birthday;
+        this.evalutions=new StringBuilder();
+    }
+
+    public static int getNextId(){
+        return nextId;//返回静态变量
+    }
+
+    /**
+     * 静态方法
+     * 静态方法是没有this参数的方法(this参数即隐式参数,表示当前对象)
+     * 静态方法的使用情况:
+     *  1.一个方法不需要访问对象的状态,其所需参数都是通过显示参数提供(例如 Math.pow(double a, double b))
+     *  2.一个方法只需要访问类的静态域(例如: Testttt.getNextId())
+     *  3.工厂方法
+     *      例如NumberFormat类如下使用呢工厂方法生成不同的格式化对象
+     *      为什么不使用构造器完成这些呢?
+     *          1.无法命名构造器.构造器名字必须与类名相同,但是这里希望货币实例 与 百分比实例采用不同的名字.
+     *          2.使用构造器时,无法改变所构造的对象类型.而Factory方法将返回一个DecimalFormat类对象,这是NumberFormat的子类`
+     * @param args
+     */
+    @SneakyThrows
+    public static void main(String[] args) {
+        /**
+         * 不要编写返回引用可变对象的访问器方法,例如 getBirthday()返回的Date,Date对象是可变的,这就破坏了封装性.应该使用clone()
+         */
+        Testttt testttt = new Testttt(new Date(System.currentTimeMillis()));
+        Date birthday = testttt.getBirthday();
+        System.out.println(birthday);
+        birthday.setTime(19920928);
+        System.out.println(birthday);
+
+        double x=0.1;
+        NumberFormat percentInstance = NumberFormat.getPercentInstance();
+        NumberFormat currencyInstance = NumberFormat.getCurrencyInstance();
+        String format = percentInstance.format(x);
+        String format1 = currencyInstance.format(x);
+        System.out.println("format: "+format+"; format1: "+format1);
+
+    }
+}
+class Employee{
+}
+class Manager extends Employee{
+    public Manager() {
+    }
+
+    public Manager(int bounes) {
+        this.bounes = bounes;
+    }
+
+    private int bounes;
+
+    public int getBounes() {
+        return bounes;
+    }
+
+    public void setBounes(int bounes) {
+        this.bounes = bounes;
+    }
+}
+class MnagerTest{
+    @SneakyThrows
+    public static void main(String[] args){
+        Manager manager = new Manager(12);
+        Employee[] employees = new Employee[3];
+        employees[0]=manager;
+        ((Manager)employees[0]).setBounes(15);
+
+        /**
+         * 反射
+         */
+        Class<Manager> timeTestClass = Manager.class;
+        //已弃用,使用下面的方式
+        //Manager timeTest1 = timeTestClass.newInstance();
+        Manager timeTest = timeTestClass.getDeclaredConstructor().newInstance();
+
+        Class<?> componentType = timeTestClass.getComponentType();
+
+        /**
+         * 带有Declared的方法: 获取这个类所有的域,方法,构造器,包括私有的.而不带的可以获取这个类和超类的 公共的域,方法,构造器
+         */
+
+        Field[] fields = timeTestClass.getFields();
+        Field[] declaredFields = timeTestClass.getDeclaredFields();
+        Field bounes = timeTestClass.getDeclaredField("bounes");
+        boolean accessible = bounes.isAccessible();
+        boolean b = bounes.canAccess(manager);
+        bounes.setAccessible(true);
+        boolean accessible1 = bounes.isAccessible();
+        boolean b1 = bounes.canAccess(manager);
+        int o = bounes.getInt(manager);
+        for (Field field : fields) {
+            //返回用于描述构造器,方法或域名的字符串
+            String name = field.getName();
+            //返回用于描述构造器,方法或域名的整型数值.使用Modifier类中的这个方法可以分析这个返回值
+            int modifiers = field.getModifiers();
+            //返回用于描述类中定义的构造器,方法或域的Class对象
+            Class<?> declaringClass = field.getDeclaringClass();
         }
-        while (date.getMonthValue()==month){
-            System.out.printf("%3d",date.getDayOfMonth());
-            if (date.getDayOfMonth()==today){
-                System.out.print("*");
-            }else {
-                System.out.print(" ");
-            }
-            date=date.plusDays(1);
-            if (date.getDayOfWeek().getValue()==1){
-                System.out.println();
-            }
+
+        Method[] methods = timeTestClass.getMethods();
+        Method[] declaredMethods = timeTestClass.getDeclaredMethods();
+        for (Method method : methods) {
+            //返回用于描述构造器,方法或域名的字符串
+            String name = method.getName();
+            //返回用于描述构造器,方法或域名的整型数值.使用Modifier类中的这个方法可以分析这个返回值
+            int modifiers = method.getModifiers();
+            //返回用于描述类中定义的构造器,方法或域的Class对象
+            Class<?> declaringClass = method.getDeclaringClass();
+            //返回用于描述方法抛出的异常类型的Class对象数组
+            Class<?>[] exceptionTypes = method.getExceptionTypes();
+            //返回一个描述参数类型的Class对象数组
+            Class<?>[] parameterTypes = method.getParameterTypes();
+            //返回用于描述返回类型的Class对象
+            Class<?> returnType = method.getReturnType();
         }
-        if (date.getDayOfWeek().getValue()!=1){
-            System.out.println();
+
+        Constructor<?>[] constructors = timeTestClass.getConstructors();
+        Constructor<?>[] declaredConstructors = timeTestClass.getDeclaredConstructors();
+        for (Constructor<?> constructor : constructors) {
+            //返回用于描述构造器,方法或域名的字符串
+            String name = constructor.getName();
+            //返回用于描述构造器,方法或域名的整型数值.使用Modifier类中的这个方法可以分析这个返回值
+            int modifiers = constructor.getModifiers();
+            //返回用于描述类中定义的构造器,方法或域的Class对象
+            Class<?> declaringClass = constructor.getDeclaringClass();
+            //返回用于描述方法抛出的异常类型的Class对象数组
+            Class<?>[] exceptionTypes = constructor.getExceptionTypes();
+            //返回一个描述参数类型的Class对象数组
+            Class<?>[] parameterTypes = constructor.getParameterTypes();
+            //
+
+            ArrayList<Manager> list = new ArrayList<>();
+            list.add(new Manager(1));
+            list.add(new Manager(2));
+            list.add(new Manager(3));
+            list.add(new Manager(4));
+            list.add(new Manager(5));
+            list.removeIf(t->t!=null);
+
         }
+
     }
 }
