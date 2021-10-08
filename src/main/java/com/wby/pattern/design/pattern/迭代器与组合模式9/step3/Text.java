@@ -202,6 +202,14 @@ class Waitress{
         }
     }
 }
+class TestMenuMain{
+    public static void main(String[] args) {
+        PancakeHouseMenu pancakeHouseMenu = new PancakeHouseMenu();
+        DinerMenu dinerMenu = new DinerMenu();
+        Waitress waitress = new Waitress(pancakeHouseMenu, dinerMenu);
+        waitress.printMenu();
+    }
+}
 /**
  * 这样修改有什么好处?
  * 煎饼屋和餐厅都实现了Menu接口,服务员可以利用接口(而不是具体类)引用每一个菜单对象."针对接口编程,而不是针对实现编程",我们减少了服务员和具体类之间的依赖
